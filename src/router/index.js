@@ -145,6 +145,18 @@ export const constantRoutes = [
         component: () => import('@/views/config/member-attribute.vue'),
         name: 'MemberAttribute',
         meta: { title: '会员属性配置', icon: 'dashboard', noCache: true }
+      },
+      {
+        path: '/config/qa',
+        component: () => import('@/views/config/qa.vue'),
+        name: 'qa',
+        meta: { title: '问卷配置', icon: 'dashboard', noCache: true }
+      },
+      {
+        path: '/config/qaConfig',
+        component: () => import('@/views/config/qaConfig.vue'),
+        name: 'qa',
+        meta: { title: '问卷数值配置', icon: 'dashboard', noCache: true }
       }
     ]
   }

@@ -1,6 +1,7 @@
 <template>
   <div class="mod-config">
     <el-table
+      v-horizontal-scroll="'always'"
       :data="dataList"
       border
       style="width: 100%;"

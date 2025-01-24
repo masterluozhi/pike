@@ -11,70 +11,70 @@
         config-name="代币配置"
         @getDataList="this.initData"
       />
-      <el-table :data="arr" style="width: 100%">
+      <el-table v-horizontal-scroll="'always'" :data="arr" style="width: 100%">
         <el-table-column label="顾客档案ID" width="100">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][0]" />
+            <el-input v-model="arr[scope.$index].id" />
           </template>
         </el-table-column>
         <el-table-column label="顾客类型">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][1]" />
+            <el-input v-model="arr[scope.$index].type" />
           </template>
         </el-table-column>
-        <el-table-column label="顾客名称">
+        <el-table-column label="顾客名称" width="160">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][2]" />
+            <el-input v-model="arr[scope.$index].name" />
           </template>
         </el-table-column>
         <el-table-column label="出场条件-建造物ID" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][3]" />
+            <el-input v-model="arr[scope.$index].condition" />
           </template>
         </el-table-column>
         <el-table-column label="性别">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][4]" />
+            <el-input v-model="arr[scope.$index].sex" />
           </template>
         </el-table-column>
         <el-table-column label="年龄">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][5]" />
+            <el-input v-model="arr[scope.$index].age" />
           </template>
         </el-table-column>
         <el-table-column label="身体状态" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][6]" />
+            <el-input v-model="arr[scope.$index].physics" />
           </template>
         </el-table-column>
         <el-table-column label="认知功能" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][7]" />
+            <el-input v-model="arr[scope.$index].cog" />
           </template>
         </el-table-column>
         <el-table-column label="心理状态" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][8]" />
+            <el-input v-model="arr[scope.$index].mental" />
           </template>
         </el-table-column>
         <el-table-column label="生化指标" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][9]" />
+            <el-input v-model="arr[scope.$index].org" />
           </template>
         </el-table-column>
         <el-table-column label="简介" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][10]" />
+            <el-input v-model="arr[scope.$index].desc" />
           </template>
         </el-table-column>
         <el-table-column label="客户反映" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][11]" />
+            <el-input v-model="arr[scope.$index].demand" />
           </template>
         </el-table-column>
         <el-table-column label="皮肤" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][12]" />
+            <el-input v-model="arr[scope.$index].skin" />
           </template>
         </el-table-column>
       </el-table>
@@ -97,18 +97,19 @@ export default {
   },
   methods: {
     emit() {
+      const valueList = this.arr.map(obj => Object.values(obj))
       this.$confirm('是否确认修改配置?', '警告', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$api.post('config/putCustomerProfile', this.arr).then(res => {
+        this.$api.post('config/putConfig/CustomerProfile', valueList).then(res => {
           this.$message.success('更新成功')
         })
       })
     },
     initData() {
-      this.$api.get('config/getCustomerProfile').then(res => {
+      this.$api.get('config/getConfig/CustomerProfile').then(res => {
         this.arr = res.data
       })
     },

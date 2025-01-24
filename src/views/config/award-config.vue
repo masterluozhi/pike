@@ -10,6 +10,7 @@
     </el-form>
     <el-table
       v-loading="dataListLoading"
+      v-horizontal-scroll="'always'"
       :data="dataList"
       border
       style="width: 100%;"

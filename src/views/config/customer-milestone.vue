@@ -11,35 +11,35 @@
         config-name="代币配置"
         @getDataList="this.initData"
       />
-      <el-table :data="arr" style="width: 100%">
-        <el-table-column label="适用等级" width="180">
+      <el-table v-horizontal-scroll="'always'" :data="arr" style="width: 100%">
+        <el-table-column label="适用等级" width="100">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][0]" />
+            <el-input v-model="arr[scope.$index].level" />
           </template>
         </el-table-column>
-        <el-table-column label="里程碑条件">
+        <el-table-column label="里程碑条件" width="140">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][1]" />
+            <el-input v-model="arr[scope.$index].milestone" />
           </template>
         </el-table-column>
-        <el-table-column label="星星奖励">
+        <el-table-column label="星星奖励" width="140">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][2]" />
+            <el-input v-model="arr[scope.$index].star" />
           </template>
         </el-table-column>
-        <el-table-column label="随机奖励内容" width="180">
+        <el-table-column label="随机奖励内容" width="500">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][3]" />
+            <el-input v-model="arr[scope.$index].reward" />
           </template>
         </el-table-column>
         <el-table-column label="随机奖励数量">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][4]" />
+            <el-input v-model="arr[scope.$index].rewardCount" />
           </template>
         </el-table-column>
         <el-table-column label="随机奖励概率">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][5]" />
+            <el-input v-model="arr[scope.$index].rewardRate" />
           </template>
         </el-table-column>
 
@@ -63,18 +63,19 @@ export default {
   },
   methods: {
     emit() {
+      const valueList = this.arr.map(obj => Object.values(obj))
       this.$confirm('是否确认修改配置?', '警告', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$api.post('config/putCustomerMilestone', this.arr).then(res => {
+        this.$api.post('config/putConfig/CustomerMilestone', valueList).then(res => {
           this.$message.success('更新成功')
         })
       })
     },
     initData() {
-      this.$api.get('config/getCustomerMilestone').then(res => {
+      this.$api.get('config/getConfig/CustomerMilestone').then(res => {
         this.arr = res.data
       })
     },

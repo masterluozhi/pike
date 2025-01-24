@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <el-form :inline="true">
@@ -11,107 +10,77 @@
         config-name="代币配置"
         @getDataList="this.initData"
       />
-      <el-table :data="arr" style="width: 100%">
+      <el-table v-horizontal-scroll="'always'" :data="arr" style="width: 100%">
         <el-table-column label="主题ID" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][0]" />
+            <el-input v-model="arr[scope.$index].id" />
           </template>
         </el-table-column>
-        <el-table-column label="主题名称">
+        <el-table-column label="主题名称" width="150">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][1]" />
+            <el-input v-model="arr[scope.$index].name" />
           </template>
         </el-table-column>
-        <el-table-column label="所属中心">
+        <el-table-column label="所属中心" width="110">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][2]" />
+            <el-input v-model="arr[scope.$index].type" />
           </template>
         </el-table-column>
         <el-table-column label="展示条件-等级" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][3]" />
+            <el-input v-model="arr[scope.$index].lv" />
           </template>
         </el-table-column>
-        <el-table-column label="展示条件-建造ID">
+        <el-table-column label="展示条件-建造ID" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][4]" />
+            <el-input v-model="arr[scope.$index].showId" />
           </template>
         </el-table-column>
         <el-table-column label="解锁条件-等级">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][5]" />
+            <el-input v-model="arr[scope.$index].unlock" />
           </template>
         </el-table-column>
         <el-table-column label="解锁条件-建造ID" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][6]" />
+            <el-input v-model="arr[scope.$index].unlockId" />
           </template>
         </el-table-column>
-        <el-table-column label="完成奖励">
+        <el-table-column label="完成奖励" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][7]" />
+            <el-input v-model="arr[scope.$index].award" />
           </template>
         </el-table-column>
-        <el-table-column label="奖励数量">
+        <el-table-column label="奖励数量" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][8]" />
+            <el-input v-model="arr[scope.$index].awardCnt" />
           </template>
         </el-table-column>
         <el-table-column label="主题简介" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][9]" />
+            <el-input v-model="arr[scope.$index].desc" />
           </template>
         </el-table-column>
-        <el-table-column label="x" width="180">
+        <el-table-column label="x">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][10]" />
+            <el-input v-model="arr[scope.$index].x" />
           </template>
         </el-table-column>
-        <el-table-column label="y" width="180">
+        <el-table-column label="y">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][11]" />
+            <el-input v-model="arr[scope.$index].y" />
           </template>
         </el-table-column>
         <el-table-column label="偏移" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][12]" />
-          </template>
-        </el-table-column>
-        <el-table-column label="最大客人数" width="180">
-          <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][13]" />
-          </template>
-        </el-table-column>
-        <el-table-column label="图标" width="180">
-          <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][14]" />
-          </template>
-        </el-table-column>
-        <el-table-column label="星" width="180">
-          <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][15]" />
-          </template>
-        </el-table-column>
-        <el-table-column label="zb" width="180">
-          <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][16]" />
-          </template>
-        </el-table-column>
-        <el-table-column label="图片" width="180">
-          <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][17]" />
-          </template>
-        </el-table-column>
-        <el-table-column label="墙" width="180">
-          <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][18]" />
+            <el-input v-model="arr[scope.$index].offset" />
           </template>
         </el-table-column>
       </el-table>
     </el-form>
   </div>
 </template>
-<script >
+<script>
 import UploadConfig from '@/views/qiniu/uploadConfig.vue'
 
 export default {
@@ -127,18 +96,19 @@ export default {
   },
   methods: {
     emit() {
+      const valueList = this.arr.map(obj => Object.values(obj))
       this.$confirm('是否确认修改配置?', '警告', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$api.post('config/putConstructionTheme', this.arr).then(res => {
+        this.$api.post('config/putConfig/ConstructionTheme', valueList).then(res => {
           this.$message.success('更新成功')
         })
       })
     },
     initData() {
-      this.$api.get('config/getConstructionTheme').then(res => {
+      this.$api.get('config/getConfig/ConstructionTheme').then(res => {
         this.arr = res.data
       })
     },

@@ -1,6 +1,6 @@
 <template>
   <el-tabs v-model="activeName">
-    <el-tab-pane label="等级管理" name="level">
+    <el-tab-pane v-horizontal-scroll="'always'" label="等级管理" name="level">
       <configTable :columns="levelColumns" type="level" />
     </el-tab-pane>
     <el-tab-pane label="AF参数配置" name="second">

@@ -40,6 +40,7 @@
     </el-form>
     <el-table
       v-loading="dataListLoading"
+      v-horizontal-scroll="'always'"
       :data="dataList"
       border
       style="width: 100%;"
@@ -55,6 +56,12 @@
         header-align="center"
         align="center"
         label="元素名"
+      />
+      <el-table-column
+        prop="level"
+        header-align="center"
+        align="center"
+        label="元素等级"
       />
       <el-table-column
         prop="section"
@@ -165,7 +172,13 @@
         label="备注"
       />
       <el-table-column
-        prop="description"
+        prop="typeDesc"
+        header-align="center"
+        align="center"
+        label="序列简介"
+      />
+      <el-table-column
+        prop="elementDesc"
         header-align="center"
         align="center"
         label="元素说明"

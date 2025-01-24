@@ -11,20 +11,15 @@
         config-name="代币配置"
         @getDataList="this.initData"
       />
-      <el-table :data="arr" style="width: 100%">
+      <el-table v-horizontal-scroll="'always'" :data="arr" style="width: 100%">
         <el-table-column label="代币ID" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][0]" />
+            <el-input v-model="arr[scope.$index].id" />
           </template>
         </el-table-column>
         <el-table-column label="代币名称">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][1]" />
-          </template>
-        </el-table-column>
-        <el-table-column label="备注">
-          <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][2]" />
+            <el-input v-model="arr[scope.$index].itemName" />
           </template>
         </el-table-column>
       </el-table>
@@ -47,18 +42,19 @@ export default {
   },
   methods: {
     emit() {
+      const valueList = this.arr.map(obj => Object.values(obj))
       this.$confirm('是否确认修改配置?', '警告', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$api.post('config/putToken', this.arr).then(res => {
+        this.$api.post('config/putConfig/Token', valueList).then(res => {
           this.$message.success('更新成功')
         })
       })
     },
     initData() {
-      this.$api.get('config/getToken').then(res => {
+      this.$api.get('config/getConfig/Token').then(res => {
         this.arr = res.data
       })
     },

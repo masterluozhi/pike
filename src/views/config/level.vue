@@ -11,25 +11,30 @@
         config-name="升级配置"
         @getDataList="this.initData"
       />
-      <el-table :data="arr" style="width: 100%">
+      <el-table v-horizontal-scroll="'always'" :data="arr" style="width: 100%">
         <el-table-column label="等级" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][0]" />
+            <el-input v-model="arr[scope.$index].level" />
           </template>
         </el-table-column>
         <el-table-column label="下一级所需经验">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][1]" />
+            <el-input v-model="arr[scope.$index].upgradeExp" />
           </template>
         </el-table-column>
         <el-table-column label="完成奖励">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][2]" />
+            <el-input v-model="arr[scope.$index].reward" />
           </template>
         </el-table-column>
         <el-table-column label="奖励数量">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][3]" />
+            <el-input v-model="arr[scope.$index].rewardCount" />
+          </template>
+        </el-table-column>
+        <el-table-column label="任务数量">
+          <template v-slot="scope">
+            <el-input v-model="arr[scope.$index].taskCount" />
           </template>
         </el-table-column>>
       </el-table>
@@ -52,18 +57,19 @@ export default {
   },
   methods: {
     emit() {
+      const valueList = this.arr.map(obj => Object.values(obj))
       this.$confirm('是否确认修改配置?', '警告', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$api.post('config/putLevel', this.arr).then(res => {
+        this.$api.post('config/putConfig/Level', valueList).then(res => {
           this.$message.success('更新成功')
         })
       })
     },
     initData() {
-      this.$api.get('config/getLevel').then(res => {
+      this.$api.get('config/getConfig/Level').then(res => {
         this.arr = res.data
       })
     },

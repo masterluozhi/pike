@@ -11,120 +11,120 @@
         config-name="代币配置"
         @getDataList="this.initData"
       />
-      <el-table :data="arr" style="width: 100%">
+      <el-table v-horizontal-scroll="'always'" :data="arr" style="width: 100%">
         <el-table-column label="主题ID" width="100">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][0]" />
+            <el-input v-model="arr[scope.$index].roomId" />
           </template>
         </el-table-column>
         <el-table-column label="建造物ID" width="100">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][1]" />
+            <el-input v-model="arr[scope.$index].itemId" />
           </template>
         </el-table-column>
         <el-table-column label="建造物名称">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][2]" />
+            <el-input v-model="arr[scope.$index].itemName" />
           </template>
         </el-table-column>
         <el-table-column label="消费星星">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][3]" />
+            <el-input v-model="arr[scope.$index].stars" />
           </template>
         </el-table-column>
         <el-table-column label="类型">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][4]" />
+            <el-input v-model="arr[scope.$index].itemType" />
           </template>
         </el-table-column>
         <el-table-column label="完成奖励" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][5]" />
+            <el-input v-model="arr[scope.$index].reward" />
           </template>
         </el-table-column>
         <el-table-column label="奖励数量" width="100">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][6]" />
+            <el-input v-model="arr[scope.$index].rewardCount" />
           </template>
         </el-table-column>
-        <el-table-column label="建造度" width="100">
+        <el-table-column label="建造度">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][7]" />
+            <el-input v-model="arr[scope.$index].progress" />
           </template>
         </el-table-column>
         <el-table-column label="后续建造物" width="100">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][8]" />
+            <el-input v-model="arr[scope.$index].next" />
           </template>
         </el-table-column>
         <el-table-column label="收益属性ID" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][9]" />
+            <el-input v-model="arr[scope.$index].buff" />
           </template>
         </el-table-column>
         <el-table-column label="收益属性权重" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][10]" />
+            <el-input v-model="arr[scope.$index].buffWeight" />
           </template>
         </el-table-column>
         <el-table-column label="建造物简介" width="180">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][11]" />
+            <el-input v-model="arr[scope.$index].desc" />
           </template>
         </el-table-column>
         <el-table-column label="长">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][12]" />
+            <el-input v-model="arr[scope.$index].x" />
           </template>
         </el-table-column>
         <el-table-column label="宽">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][13]" />
+            <el-input v-model="arr[scope.$index].y" />
           </template>
         </el-table-column>
-        <el-table-column label="位置">
+        <el-table-column label="位置" width="100">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][14]" />
+            <el-input v-model="arr[scope.$index].pos" />
           </template>
         </el-table-column>
-        <el-table-column label="皮肤">
+        <el-table-column label="皮肤" width="120">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][15]" />
+            <el-input v-model="arr[scope.$index].skin" />
           </template>
         </el-table-column>
-        <el-table-column label="升级皮肤">
+        <el-table-column label="升级皮肤" width="120">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][16]" />
+            <el-input v-model="arr[scope.$index].unlockSkin" />
           </template>
         </el-table-column>
         <el-table-column label="朝向">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][17]" />
+            <el-input v-model="arr[scope.$index].face" />
           </template>
         </el-table-column>
         <el-table-column label="朝向个数">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][18]" />
+            <el-input v-model="arr[scope.$index].faceMax" />
           </template>
         </el-table-column>
         <el-table-column label="种类">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][19]" />
+            <el-input v-model="arr[scope.$index].type" />
           </template>
         </el-table-column>
         <el-table-column label="eff">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][20]" />
+            <el-input v-model="arr[scope.$index].eff" />
           </template>
         </el-table-column>
-        <el-table-column label="皮肤对应id">
+        <el-table-column label="皮肤对应id" width="120">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][21]" />
+            <el-input v-model="arr[scope.$index].id" />
           </template>
         </el-table-column>
         <el-table-column label="顺序">
           <template v-slot="scope">
-            <el-input v-model="arr[scope.$index][22]" />
+            <el-input v-model="arr[scope.$index].order" />
           </template>
         </el-table-column>
 
@@ -147,19 +147,21 @@ export default {
     this.initData()
   },
   methods: {
+
     emit() {
+      const valueList = this.arr.map(obj => Object.values(obj))
       this.$confirm('是否确认修改配置?', '警告', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$api.post('config/putConstructionContent', this.arr).then(res => {
+        this.$api.post('config/putConfig/ConstructionContent', valueList).then(res => {
           this.$message.success('更新成功')
         })
       })
     },
     initData() {
-      this.$api.get('config/getConstructionContent').then(res => {
+      this.$api.get('config/getConfig/ConstructionContent').then(res => {
         this.arr = res.data
       })
     },
